@@ -22,4 +22,13 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/:id", (req, res) => {
+  BookModel.find({ _id: req.params["id"] }, function(err, docs) {
+    if (err) {
+      res.status(404).send();
+    }
+    res.send(docs);
+  });
+});
+
 module.exports = router;
