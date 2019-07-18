@@ -10,8 +10,15 @@ router.use(function timeLog(req, res, next) {
 router.post("/", (req, res) => {
   var bookModel = new BookModel(req.body);
   bookModel.save(function(err, book) {
-    if (err) return handleError(err);
+    if (err) return err;
     res.send(book);
+  });
+});
+
+router.get("/", (req, res) => {
+  BookModel.find({}, function(err, docs) {
+    if (err) return err;
+    res.send(docs);
   });
 });
 
