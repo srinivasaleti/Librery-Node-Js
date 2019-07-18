@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
 const db = mongoose.connection;
-app.use(bodyParser());
+const books = require("./books");
 
 mongoose.connect("mongodb://localhost:27017/library", {
   useNewUrlParser: true
@@ -14,17 +14,8 @@ db.once("open", function() {
   console.log("DB Connnected");
 });
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
-
-app.post("/books", (req, res) => {
-  var bookModel = new BookModel(req.body);
-  bookModel.save(function(err, book) {
-    if (err) return handleError(err);
-    res.send(book);
-  });
-});
+app.use(bodyParser());
+app.use("/books", books);
 
 app.listen(4000, () => {
   console.log("Starting Application");
