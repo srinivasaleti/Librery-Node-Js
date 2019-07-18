@@ -1,4 +1,3 @@
-const { BookModel } = require("./Schema/BookSchema");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
